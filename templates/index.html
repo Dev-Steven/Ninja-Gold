@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ninja Money</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<style>
+    body {
+        text-align: center;
+    }
+
+    .wrapper {
+        border: 1px solid #eee;
+        border-radius: 8px;
+        width: 633px;
+        display: inline-block;
+        background-color: #353a40;
+        color: #eee;
+    }
+
+    .header {
+        display: inline-block;
+        padding: 10px 0 10px 10px;
+    }
+
+    .current_gold {
+        display: inline-block;
+        width: 150px;
+        height: 28px;
+        border: 1px solid #eee;
+        vertical-align: top;
+        padding: 3px 1px 1px 1px;
+    }
+
+    .your_gold {
+        display: inline-block;
+        vertical-align: top;
+        margin: 3px 20px 0 0;
+    }
+
+    .options {
+        text-align: center;
+    }
+
+    .options form {
+        border: 1px solid #eee;
+        display: inline-block;
+        width: 150px;
+        border-radius: 8px;
+    }
+
+    button {
+        margin-bottom: 10px;
+    }
+
+    .activities {
+        padding: 10px 0 10px 10px;
+        text-align: left;
+    }
+
+    .avtivities_title {
+        margin: 5px 20px 5px 0;        
+    }
+
+    ul {
+        list-style-type: none;
+    }
+
+
+
+</style>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <p class="your_gold">Your gold:</p>
+            <div class="current_gold">{{ session['gold'] }}</div>
+        </div>
+
+        <div class="options">
+            <form action="/process_money" method="POST">
+                <h2>Farm</h2>
+                <p>(earns 10-20 gold)</p>
+                <input type="hidden" name="land_type" value="farm">
+                <button type="submit" class="btn btn-warning">Find Gold!</button>
+            </form>
+    
+            <form action="/process_money" method="POST">
+                <h2>Cave</h2>
+                <p>(earns 5-10 gold)</p>
+                <input type="hidden" name="land_type" value="cave">
+                <button type="submit" class="btn btn-warning">Find Gold!</button>
+
+            </form>
+    
+            <form action="/process_money" method="POST">
+                <h2>House</h2>
+                <p>(earns 2-5 gold)</p>
+                <input type="hidden" name="land_type" value="house">
+                <button type="submit" class="btn btn-warning">Find Gold!</button>
+
+            </form>
+    
+            <form action="/process_money" method="POST">
+                <h2>Casino</h2>
+                <p>(earn/take 0-50 gold)</p>
+                <input type="hidden" name="land_type" value="casino">
+                <button type="submit" class="btn btn-warning">Find Gold!</button>
+            </form>
+        </div>
+
+        <div class="activities">
+            <p class="avtivities_title">Activities:</p>
+            <ul>
+                {% for activity in activity_log %}
+                <li>{{ activity }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <form action="/clear" method="POST">
+            <button type="input" class='btn btn-danger'>Reset</button>
+        </form>
+    </div>    
+</body>
+</html>
